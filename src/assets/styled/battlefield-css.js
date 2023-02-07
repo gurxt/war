@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 const BattlefieldCSS = () => {
-    const C = styled.div`
+    const B = styled.div`
         display: flex;
         width: 100%;
         height: 100%;
     `
 
-    const C1 = styled.div`
+    const B1 = styled.div`
         display: flex;
         flex-direction: column;
         width: 20%;
@@ -15,14 +15,14 @@ const BattlefieldCSS = () => {
         background: #2229;
     `
 
-    const C2 = styled.div`
+    const B2 = styled.div`
         display: flex;
         flex-direction: column;
         width: 60%;
         height: 100%;
     `
 
-    const C3 = styled.div`
+    const B3 = styled.div`
         display: flex;
         flex-direction: column;
         width: 20%;
@@ -30,7 +30,7 @@ const BattlefieldCSS = () => {
         background: #2229;
     `
 
-    const C1a = styled.div`
+    const B1a = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -39,13 +39,13 @@ const BattlefieldCSS = () => {
         background: #4449;
     `
 
-    const C1b = styled.div`
+    const B1b = styled.div`
         width: 100%;
         height: 90%;
         background: #2229;
     `
 
-    const C2a = styled.div`
+    const B2a = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -54,7 +54,7 @@ const BattlefieldCSS = () => {
         background: #2229;
     `
 
-    const C2b = styled.div`
+    const B2b = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -63,13 +63,13 @@ const BattlefieldCSS = () => {
         background: #4449;
     `
 
-    const C3a = styled.div`
+    const B3a = styled.div`
         width: 100%;
         height: 10%;
         background: #4449;
     `
 
-    const C3b = styled.div`
+    const B3b = styled.div`
         width: 100%;
         height: 90%;
         background: #2229;
@@ -106,10 +106,10 @@ const BattlefieldCSS = () => {
     `
 
     return { 
-        C, Cell, Player, Empty, G,
-        C1, C1a, C1b,
-        C2, C2a, C2b,
-        C3, C3a, C3b
+        B, Cell, Player, Empty, G,
+        B1, B1a, B1b,
+        B2, B2a, B2b,
+        B3, B3a, B3b
     }
 }
 
