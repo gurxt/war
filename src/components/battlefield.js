@@ -8,7 +8,7 @@ import BattlefieldCSS from './../assets/styled/battlefield-css.js'
 import SCRIPT from './../scripts/battlefield-script.js'
 
 const Battlefield = ({ players }) => {
-    /* global variables */
+    /* declare global vars */
     const CSS = BattlefieldCSS()
     const xy_grid = 50**2
     const xy_dim = 100 / Math.ceil(Math.sqrt(xy_grid))
@@ -20,23 +20,27 @@ const Battlefield = ({ players }) => {
     const [running, set_running] = useState()
     const [iter, set_iter] = useState(0)
 
-    useEffect(() => {
+    const grid_n_populate = () => {
         for (let i=0; i < players; i++) {
             let pos_xy = Math.ceil(Math.random() * xy_grid - 1)
             while (grid[pos_xy].occ)
                 pos_xy = Math.ceil(Math.random() * xy_grid - 1)
-            set_playr_loc(prev => prev.concat([pos_xy]))
+                set_playr_loc(prev => prev.concat([pos_xy]))
             set_grid(prev => prev.map((x, y) => {
-                return y == pos_xy ? ({ occ: true, color: i % 2 == 0 ? '#f99' : '#99f' }) : x 
+                return y === pos_xy ? ({ occ: true, color: i % 2 === 0 ? '#000' : '#fff' }) : x 
             }))
         }
-    }, [])
+    }
+
+    useEffect(() => grid_n_populate(), 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [])
 
     const handleStart = () => {
         set_running(
             setInterval(() => {
                 const { _grid, _playr_loc } = SCRIPT(grid, playr_loc, xy_grid)
-                set_playr_loc([...playr_loc])
+                set_playr_loc([..._playr_loc])
                 set_grid([..._grid])
                 set_iter(prev => prev += 1)
             }, 200)
@@ -52,7 +56,7 @@ const Battlefield = ({ players }) => {
     return (
         <CSS.C>
             <CSS.C1>
-                <CSS.C1a><span style={{'color':'#fff','font-size':'30px'}}>{ iter }</span></CSS.C1a>
+                <CSS.C1a><span style={{'color':'#fff','fontSize':'30px'}}>{ iter }</span></CSS.C1a>
                 <CSS.C1b />
             </CSS.C1>
             <CSS.C2>
