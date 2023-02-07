@@ -10,18 +10,18 @@ const CSS = BattlefieldCSS()
 
 const Battlefield = ({ players }) => {
     /* declare global vars */
-    const xy_grid = 20**2
+    const xy_grid = 40**2
     const xy_dim = 100 / Math.ceil(Math.sqrt(xy_grid))
     /* state */
     const [grid, set_grid] = useState([])
     const [playr_loc, set_playr_loc] = useState([])
     const [running, set_running] = useState()
     const [iter, set_iter] = useState(0)
+    const [kill, set_kill] = useState([])
     /* empty cell object */
     const e_cell = {
         occ: false, color: '#4449', decWar: false, warDec: false
     }
-
 
     useEffect(() => {
         const grid_n = Array.from({ length: xy_grid }, (_, i) => i + 1)
@@ -38,7 +38,9 @@ const Battlefield = ({ players }) => {
     const handleStart = () => {
         set_running(
             setInterval(() => {
-                const { _grid, _playr_loc } = SCRIPT.update_grid(grid, playr_loc, xy_grid, e_cell)
+                const { _grid, _playr_loc, _kill } = 
+                    SCRIPT.update_grid(grid, playr_loc, xy_grid, e_cell, kill)
+                set_kill([..._kill])
                 set_playr_loc([..._playr_loc])
                 set_grid([..._grid])
                 set_iter(prev => prev += 1)
@@ -54,8 +56,28 @@ const Battlefield = ({ players }) => {
     return (
         <CSS.B>
             <CSS.B1>
-                <CSS.B1a><span style={{'color':'#fff','fontSize':'30px'}}>{ iter }</span></CSS.B1a>
-                <CSS.B1b />
+                <CSS.B1a>
+                    <CSS.Alive>
+                    { playr_loc.filter(x => x && grid[x].color === '#000').length }
+                    </CSS.Alive>
+                </CSS.B1a>
+                <CSS.B1b>
+                { kill.map((x, y) => {
+                    return (
+                        <CSS.Kill>
+                            <CSS.Idx color={x.killer.color}>{x.idx[0]}</CSS.Idx>
+                            &nbsp;
+                            <CSS.KColor color={x.killer.color}>{x.killer.color}</CSS.KColor>
+                            &nbsp;
+                            <CSS.Slain>SLAIN</CSS.Slain>
+                            &nbsp;
+                            <CSS.Idx color={x.slain.color}>{x.idx[1]}</CSS.Idx>
+                            &nbsp;
+                            <CSS.KColor color={x.slain.color}>{x.slain.color}</CSS.KColor>
+                        </CSS.Kill>
+                    )
+                })}
+                </CSS.B1b>
             </CSS.B1>
             <CSS.B2>
                 <CSS.B2a>
@@ -75,7 +97,12 @@ const Battlefield = ({ players }) => {
                 </CSS.B2b>
             </CSS.B2>
             <CSS.B3>
-                <CSS.B3a />
+                <CSS.B3a>
+                    <CSS.Alive>
+                    { grid.length > 0 &&
+                      playr_loc.filter(x => x && grid[x].color === '#fff').length }
+                    </CSS.Alive>
+                </CSS.B3a>
                 <CSS.B3b />
             </CSS.B3>
         </CSS.B>
