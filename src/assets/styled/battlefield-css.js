@@ -31,21 +31,9 @@ const BattlefieldCSS = () => {
     `
 
     const B1a = styled.div`
-        display: flex;
-        justify-content: center;
-        align-items: center;
         width: 100%;
         height: 10%;
         background: #4449;
-    `
-
-    const B1b = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 90%;
-        background: #2229;
     `
 
     const B2a = styled.div`
@@ -114,32 +102,10 @@ const BattlefieldCSS = () => {
         background: #777;
     `
 
-    const Kill = styled.div`
-        display: flex;
-        align-items: center;
-        height: 4%;
-        width; 90%;
-        font-size: 15px;
-    `
-
-    const Idx = styled.div`
-        color: ${props => props.color};
-        font-weight: bold;
-    `
-
-    const KColor = styled.div`
-        color: ${props => props.color};
-    `
-
-    const Slain = styled.div`
-        color: #fff;
-        font-size: 20px;
-    `
 
     return { 
-        B, Cell, Player, Empty, G,
-        Alive, Kill, Idx, KColor, Slain,
-        B1, B1a, B1b,
+        B, Cell, Player, Empty, G, Alive, 
+        B1, B1a,
         B2, B2a, B2b,
         B3, B3a, B3b
     }

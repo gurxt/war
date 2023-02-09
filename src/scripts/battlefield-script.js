@@ -75,7 +75,7 @@ const valid_moves = (_curr_pos, _grid, _xy_grid) => {
     return moves
 }
 
-const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kill) => {
+const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kills) => {
     for (let i=0; i < _playr_loc.length; i++) {
         // store the data in the curr cell
         const prev = _playr_loc[i]
@@ -86,7 +86,7 @@ const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kill) => {
             if (valid_moves_c.length !== 0) {
                 const next = valid_moves_c[Math.floor(Math.random() * valid_moves_c.length)]
                 if (next.war) {
-                    _kill.push({
+                    _kills.push({
                         killer: _grid[prev],
                         slain: _grid[next.value + prev],
                         idx: [prev, next.value + prev]
@@ -109,7 +109,7 @@ const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kill) => {
         }
     }
 
-    return { _grid, _playr_loc, _kill }
+    return { _grid, _playr_loc, _kills }
 }
 
 export default { update_grid, populate }

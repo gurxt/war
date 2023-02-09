@@ -1,11 +1,13 @@
 /* external package imports */
 import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
+/* internal package import */
+import Killfeed from './killfeed'
 /* css import */
 import BattlefieldCSS from './../assets/styled/battlefield-css.js'
 /* script import */
 import SCRIPT from './../scripts/battlefield-script.js'
-/* css prettify */
+/* css renamed */
 const CSS = BattlefieldCSS()
 
 const Battlefield = ({ players }) => {
@@ -17,7 +19,7 @@ const Battlefield = ({ players }) => {
     const [playr_loc, set_playr_loc] = useState([])
     const [running, set_running] = useState()
     const [iter, set_iter] = useState(0)
-    const [kill, set_kill] = useState([])
+    const [kills, set_kills] = useState([])
     /* empty cell object */
     const e_cell = {
         occ: false, color: '#4449', decWar: false, warDec: false
@@ -38,9 +40,9 @@ const Battlefield = ({ players }) => {
     const handleStart = () => {
         set_running(
             setInterval(() => {
-                const { _grid, _playr_loc, _kill } = 
-                    SCRIPT.update_grid(grid, playr_loc, xy_grid, e_cell, kill)
-                set_kill([..._kill])
+                const { _grid, _playr_loc, _kills } = 
+                    SCRIPT.update_grid(grid, playr_loc, xy_grid, e_cell, kills)
+                set_kills([..._kills])
                 set_playr_loc([..._playr_loc])
                 set_grid([..._grid])
                 set_iter(prev => prev += 1)
@@ -61,23 +63,7 @@ const Battlefield = ({ players }) => {
                     { playr_loc.filter(x => x && grid[x].color === '#000').length }
                     </CSS.Alive>
                 </CSS.B1a>
-                <CSS.B1b>
-                { kill.map((x, y) => {
-                    return (
-                        <CSS.Kill>
-                            <CSS.Idx color={x.killer.color}>{x.idx[0]}</CSS.Idx>
-                            &nbsp;
-                            <CSS.KColor color={x.killer.color}>{x.killer.color}</CSS.KColor>
-                            &nbsp;
-                            <CSS.Slain>SLAIN</CSS.Slain>
-                            &nbsp;
-                            <CSS.Idx color={x.slain.color}>{x.idx[1]}</CSS.Idx>
-                            &nbsp;
-                            <CSS.KColor color={x.slain.color}>{x.slain.color}</CSS.KColor>
-                        </CSS.Kill>
-                    )
-                })}
-                </CSS.B1b>
+                <Killfeed kills={kills} />
             </CSS.B1>
             <CSS.B2>
                 <CSS.B2a>
