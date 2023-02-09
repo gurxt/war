@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 /* internal package import */
 import Killfeed from './killfeed'
+import Scoreboard from './scoreboard'
 /* css import */
 import BattlefieldCSS from './../assets/styled/battlefield-css.js'
 /* script import */
@@ -58,11 +59,7 @@ const Battlefield = ({ players }) => {
     return (
         <CSS.B>
             <CSS.B1>
-                <CSS.B1a>
-                    <CSS.Alive>
-                    { playr_loc.filter(x => x && grid[x].color === '#000').length }
-                    </CSS.Alive>
-                </CSS.B1a>
+                <Scoreboard kills={kills} players={players} />
                 <Killfeed kills={kills} />
             </CSS.B1>
             <CSS.B2>
@@ -84,10 +81,6 @@ const Battlefield = ({ players }) => {
             </CSS.B2>
             <CSS.B3>
                 <CSS.B3a>
-                    <CSS.Alive>
-                    { grid.length > 0 &&
-                      playr_loc.filter(x => x && grid[x].color === '#fff').length }
-                    </CSS.Alive>
                 </CSS.B3a>
                 <CSS.B3b />
             </CSS.B3>

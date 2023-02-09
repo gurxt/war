@@ -30,11 +30,6 @@ const BattlefieldCSS = () => {
         background: #2229;
     `
 
-    const B1a = styled.div`
-        width: 100%;
-        height: 10%;
-        background: #4449;
-    `
 
     const B2a = styled.div`
         display: flex;
@@ -64,12 +59,6 @@ const BattlefieldCSS = () => {
         width: 100%;
         height: 90%;
         background: #2229;
-    `
-
-    const Alive = styled.div`
-        font-size: 20;
-        font-weight: bold;
-        color: #fff;
     `
 
     const G = styled.div`
@@ -104,8 +93,8 @@ const BattlefieldCSS = () => {
 
 
     return { 
-        B, Cell, Player, Empty, G, Alive, 
-        B1, B1a,
+        B, Cell, Player, Empty, G,
+        B1,
         B2, B2a, B2b,
         B3, B3a, B3b
     }
