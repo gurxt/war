@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 /* css import */
 import AppCSS from './assets/styled/application-css'
 /* custom component imports */
 import Battlefield from './components/battlefield.js'
-import Player from './components/player.js'
 
 const CSS = AppCSS()
 

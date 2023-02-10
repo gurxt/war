@@ -124,4 +124,5 @@ const update_grid = (_grid, _playr_loc, _e_cell, _kills) => {
     return { _grid, _playr_loc, _kills }
 }
 
+/* eslint-disable-next-line */
 export default { update_grid, populate }

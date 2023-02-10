@@ -19,7 +19,7 @@ const Battlefield = ({ players }) => {
     const [grid, set_grid] = useState([])
     const [playr_loc, set_playr_loc] = useState([])
     const [running, set_running] = useState()
-    const [iter, set_iter] = useState(0)
+    /*const [iter, set_iter] = useState(0)*/
     const [kills, set_kills] = useState([])
     /* empty cell object */
     const e_cell = {

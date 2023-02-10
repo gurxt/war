@@ -83,7 +83,7 @@ const BattlefieldCSS = () => {
         width: 50%;
         height: 50%;
         border: 10% solid #fff;
-        border-radius: ${props => props.bg == '#4449' ? '0%' : '50%'};
+        border-radius: ${props => props.bg === '#4449' ? '0%' : '50%'};
         background: ${props => props.bg};
     `
 
