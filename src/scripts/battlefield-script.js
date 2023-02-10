@@ -1,12 +1,3 @@
-const add_terrain = (_grid, _e_cell) => {
-    // 1 per iteration.
-    let idx = Math.floor(Math.random() * _grid.length)
-    while (_grid[idx].occ)
-        idx = Math.floor(Math.random() * _grid.length)
-    _grid[idx] = {..._e_cell, color: '#0f0', occ: true}
-    return _grid
-}
-
 const populate = (_players, _grid, _xy_grid, e_cell) => {
     // empty array to store players.
     const plyr_loc = []
@@ -31,8 +22,10 @@ const populate = (_players, _grid, _xy_grid, e_cell) => {
     return { _grid, plyr_loc }
 }
 
-const valid_moves = (_curr_pos, _grid, _xy_grid) => {
-    const row = Math.sqrt(_xy_grid)
+const valid_moves = (_curr_pos, _grid) => {
+    const _xy_grid = _grid.length 
+    const row = Math.ceil(Math.sqrt(_grid.length))
+    console.log(row)
     const moves = []
 
     if (!_grid[_curr_pos])
@@ -40,10 +33,8 @@ const valid_moves = (_curr_pos, _grid, _xy_grid) => {
 
     // check left.
     if (_curr_pos - 1 > 0 && _grid[_curr_pos - 1]) { // ensure not out of bounds.
-        if (_grid[_curr_pos - 1].color === '#0f0') { // illegal move
-            console.log('terrain')
         // check if next cell is enemy or empty.
-        } else if ((_grid[_curr_pos].color !== _grid[_curr_pos - 1].color) &&
+        if ((_grid[_curr_pos].color !== _grid[_curr_pos - 1].color) &&
             (_grid[_curr_pos - 1].color !== '#4449')) { // enemy (declare war)
             moves.push({ value: -1, war: true })
             // war dec resolves when we arrive at the next cell.
@@ -54,10 +45,7 @@ const valid_moves = (_curr_pos, _grid, _xy_grid) => {
 
     // check right
     if (_curr_pos + 1 < _xy_grid - 1 && _grid[_curr_pos + 1]) {
-        if (_grid[_curr_pos + 1].color === '#0f0') { // illegal move
-            console.log('terrain')
-        // check if next cell is enemy or empty.
-        } else if ((_grid[_curr_pos].color !== _grid[_curr_pos + 1].color) &&
+        if ((_grid[_curr_pos].color !== _grid[_curr_pos + 1].color) &&
             (_grid[_curr_pos + 1].color !== '#4449')) { // enemy (declare war)
             moves.push({ value: 1, war: true })
             // war dec resolves when we arrive at the next cell.
@@ -68,9 +56,7 @@ const valid_moves = (_curr_pos, _grid, _xy_grid) => {
 
     // check down
     if (_curr_pos - row > 0 && _grid[_curr_pos - row]) {
-        if (_grid[_curr_pos - row].color === '#0f0') { // illegal move
-            console.log('terrain')
-        } else if ((_grid[_curr_pos].color !== _grid[_curr_pos - row].color) &&
+        if ((_grid[_curr_pos].color !== _grid[_curr_pos - row].color) &&
             (_grid[_curr_pos - row].color !== '#4449')) { // enemy (declare war)
             moves.push({ value: -row, war: true })
             // war dec resolves when we arrive at the next cell.
@@ -81,9 +67,7 @@ const valid_moves = (_curr_pos, _grid, _xy_grid) => {
 
     // check up
     if (_curr_pos + row < _xy_grid - 1 && _grid[_curr_pos + row]) {
-        if (_grid[_curr_pos + row].color === '#0f0') { // illegal move
-            console.log('terrain')
-        } else if ((_grid[_curr_pos].color !== _grid[_curr_pos + row].color) &&
+        if ((_grid[_curr_pos].color !== _grid[_curr_pos + row].color) &&
             (_grid[_curr_pos + row].color !== '#4449')) { // enemy (declare war)
             moves.push({ value: row, war: true })
             // war dec resolves when we arrive at the next cell.
@@ -95,8 +79,7 @@ const valid_moves = (_curr_pos, _grid, _xy_grid) => {
     return moves
 }
 
-const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kills) => {
-    //_grid = add_terrain(_grid, _e_cell)
+const update_grid = (_grid, _playr_loc, _e_cell, _kills) => {
     const cell_del= _grid.pop()
     if (cell_del.occ) {
         _playr_loc[_playr_loc.indexOf(_grid.length)] = null
@@ -112,7 +95,7 @@ const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kills) => {
         const prev = _playr_loc[i]
         // check if prev is not null
         if (prev) {
-            const valid_moves_c = valid_moves(prev, _grid, _xy_grid)
+            const valid_moves_c = valid_moves(prev, _grid)
             // get random move.
             if (valid_moves_c.length !== 0) {
                 const next = valid_moves_c[Math.floor(Math.random() * valid_moves_c.length)]
@@ -141,4 +124,4 @@ const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kills) => {
     return { _grid, _playr_loc, _kills }
 }
 
-export default { update_grid, populate, add_terrain }
+export default { update_grid, populate }

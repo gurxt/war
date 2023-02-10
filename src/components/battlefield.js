@@ -14,8 +14,8 @@ const CSS = BattlefieldCSS()
 const Battlefield = ({ players }) => {
     /* declare global vars */
     const xy_grid = 40**2
-    const xy_dim = 100 / Math.ceil(Math.sqrt(xy_grid))
     /* state */
+    const [xy_dim, set_xy_dim] = useState(100 / Math.ceil(Math.sqrt(xy_grid)))
     const [grid, set_grid] = useState([])
     const [playr_loc, set_playr_loc] = useState([])
     const [running, set_running] = useState()
@@ -42,7 +42,8 @@ const Battlefield = ({ players }) => {
         set_running(
             setInterval(() => {
                 const { _grid, _playr_loc, _kills } = 
-                    SCRIPT.update_grid(grid, playr_loc, xy_grid, e_cell, kills)
+                    SCRIPT.update_grid(grid, playr_loc, e_cell, kills)
+                set_xy_dim(100 / Math.ceil(Math.sqrt(_grid.length)))
                 set_kills([..._kills])
                 set_playr_loc([..._playr_loc])
                 set_grid([..._grid])

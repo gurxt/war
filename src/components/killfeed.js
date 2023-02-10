@@ -9,7 +9,7 @@ const CSS = KillfeedCSS()
 const Killfeed = ({ kills }) => {
     return (
         <CSS.C> 
-        { kills.map((x, y) => {
+        { kills.reverse().map((x, y) => {
             return (
                 <CSS.Kill key={y}>
                     <CSS.Idx color={x.killer.color}>{x.idx[0]}</CSS.Idx>
