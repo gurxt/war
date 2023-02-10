@@ -46,8 +46,7 @@ const Battlefield = ({ players }) => {
                 set_kills([..._kills])
                 set_playr_loc([..._playr_loc])
                 set_grid([..._grid])
-                set_iter(prev => prev += 1)
-            }, 500)
+            }, 200)
         )
     }
 
