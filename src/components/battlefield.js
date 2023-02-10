@@ -23,7 +23,7 @@ const Battlefield = ({ players }) => {
     const [kills, set_kills] = useState([])
     /* empty cell object */
     const e_cell = {
-        occ: false, color: '#4449', decWar: false, warDec: false
+        occ: false, color: '#4449', bg: false
     }
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const Battlefield = ({ players }) => {
                 set_playr_loc([..._playr_loc])
                 set_grid([..._grid])
                 set_iter(prev => prev += 1)
-            }, 200)
+            }, 500)
         )
     }
 
@@ -71,7 +71,7 @@ const Battlefield = ({ players }) => {
                     <CSS.G>
                     { grid.map((x, y) => {
                         return (
-                            <CSS.Cell key={y} occ={true} xy_dim={xy_dim}>
+                            <CSS.Cell key={y} occ={true} xy_dim={xy_dim} bg={x.bg}>
                                 { x.occ ? <CSS.Player bg={x.color} /> : <CSS.Empty /> }
                             </CSS.Cell>
                         )

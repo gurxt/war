@@ -91,16 +91,14 @@ const update_grid = (_grid, _playr_loc, _xy_grid, _e_cell, _kills) => {
                         slain: _grid[next.value + prev],
                         idx: [prev, next.value + prev]
                     })
-                    _grid[next.value + prev] = _grid[prev]
+                    _grid[next.value + prev] = {..._grid[prev], bg: true}
                     _grid[prev] = _e_cell
                     // set new player loc.
-                    _playr_loc[i] = next.value + prev
                     _playr_loc[_playr_loc.indexOf(next.value + prev)] = null
-
-
+                    _playr_loc[i] = next.value + prev
                 } else {
                     // update the grid.
-                    _grid[next.value + prev] = _grid[prev]
+                    _grid[next.value + prev] = {..._grid[prev], bg: false}
                     _grid[prev] = _e_cell
                     // set new player loc.
                     _playr_loc[i] = next.value + prev

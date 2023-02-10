@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import splat from './../splat.png'
 
 const BattlefieldCSS = () => {
     const B = styled.div`
@@ -72,6 +73,8 @@ const BattlefieldCSS = () => {
         display: flex;
         justify-content: center;
         align-items: center;
+        background-image: ${props => props.bg ? `url(${splat})` : '#0000'};
+        background-size: 100% 100%;
         height: ${props => props.xy_dim}%;
         width: ${props => props.xy_dim}%;
     `
